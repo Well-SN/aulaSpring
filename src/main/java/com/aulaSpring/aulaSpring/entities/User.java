@@ -1,13 +1,18 @@
 package com.aulaSpring.aulaSpring.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@Entity
+@Table(name="tb_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id // Adicione esta anotação para definir 'id' como chave primária
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
