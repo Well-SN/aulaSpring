@@ -2,6 +2,7 @@ package com.aulaSpring.aulaSpring.config;
 
 import com.aulaSpring.aulaSpring.entities.Order;
 import com.aulaSpring.aulaSpring.entities.User;
+import com.aulaSpring.aulaSpring.entities.enums.OrderStatus;
 import com.aulaSpring.aulaSpring.repositories.OrderRepository;
 import com.aulaSpring.aulaSpring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class TestConfig implements CommandLineRunner {
         userRepository.saveAll(list);
 
 
-        Order o1 = new Order(null, Instant.parse("2025-03-20T19:53:07Z"), u1);
-        Order o2 = new Order(null, Instant.parse("2025-02-21T03:42:10Z"), u2);
-        Order o3 = new Order(null, Instant.parse("2025-01-22T15:21:22Z"), u1);
+        Order o1 = new Order(null, Instant.parse("2025-03-20T19:53:07Z"), OrderStatus.DELEVERED ,u1);
+        Order o2 = new Order(null, Instant.parse("2025-02-21T03:42:10Z"), OrderStatus.PAID,u2);
+        Order o3 = new Order(null, Instant.parse("2025-01-22T15:21:22Z"), OrderStatus.CANCELED, u1);
 
         ArrayList<Order> listOrder = new ArrayList<Order>();
         listOrder.add(o1);

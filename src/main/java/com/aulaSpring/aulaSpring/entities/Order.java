@@ -1,5 +1,6 @@
 package com.aulaSpring.aulaSpring.entities;
 
+import com.aulaSpring.aulaSpring.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
@@ -21,6 +22,8 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
+    private Integer orderStatus;
+
     @ManyToOne // Adicione esta anotação para definir o relacionamento
     @JoinColumn(name = "user_id") // Adicione esta anotação para definir a chave estrangeira
     private User user;
@@ -28,9 +31,10 @@ public class Order implements Serializable {
     public Order() { // Adicione este construtor padrão
     }
 
-    public Order(Long id, Instant moment, User user) {
+    public Order(Long id, Instant moment,  OrderStatus orderStatus, User user) {
         this.id = id;
         this.moment = moment;
+        setOrderStatus(orderStatus);
         this.user = user;
     }
 
@@ -50,6 +54,17 @@ public class Order implements Serializable {
         this.moment = moment;
     }
 
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(this.orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if(orderStatus !=  null){
+            this.orderStatus = orderStatus.getCode();
+        }
+
+    }
+
     public User getUser() {
         return user;
     }
@@ -63,6 +78,7 @@ public class Order implements Serializable {
         return "Order{" +
                 "id=" + id +
                 ", moment=" + moment +
+                ", status=" + orderStatus +
                 ", user=" + user +
                 '}';
     }
