@@ -1,7 +1,7 @@
 package com.aulaSpring.aulaSpring.resources;
 
-import com.aulaSpring.aulaSpring.entities.User;
-import com.aulaSpring.aulaSpring.services.UserService;
+import com.aulaSpring.aulaSpring.entities.Category;
+import com.aulaSpring.aulaSpring.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,21 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/users")
-public class UserResource {
+@RequestMapping(value="/categories")
+public class CategoryResource {
 
     @Autowired
-    private UserService service;
+    CategoryService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
-        List<User> list = service.findALL();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<List<Category>> findAll(){
+        return ResponseEntity.ok().body(service.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findID(@PathVariable Long id){
-        return ResponseEntity.ok().body(service.findID(id));
+    public ResponseEntity<Category> findID(@PathVariable Long id){
+       return ResponseEntity.ok().body(service.findID(id));
 
     }
 }
